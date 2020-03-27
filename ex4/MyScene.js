@@ -25,6 +25,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
+        this.cubequad = new MyUnitCubeQuad(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -44,10 +45,11 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayMyQuad = false;
-        this.displayMyTangram = true;
+        this.displayQuad = false;
+        this.displayCubeQuad = false;
+        this.displayTangram = true;
         this.scaleFactor = 1;
-        this.selectedTexture = -1;        
+        this.selectedTexture = -1;
         this.wrapS = 0;
         this.wrapT = 0;
 
@@ -59,7 +61,7 @@ class MyScene extends CGFscene {
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 
-      }
+    }
 
     initLights() {
         this.lights[0].setPosition(5, 2, 5, 1);
@@ -95,7 +97,7 @@ class MyScene extends CGFscene {
     }
 
     display() {
-  
+
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -116,22 +118,24 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        if (this.displayMyQuad) {
+        if (this.displayQuad) {
             this.quadMaterial.apply();
 
-        // Default texture filtering in WebCGF is LINEAR. 
-        // Uncomment next line for NEAREST when magnifying, or 
-        // add a checkbox in the GUI to alternate in real time
-        
-        // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+            // Default texture filtering in WebCGF is LINEAR. 
+            // Uncomment next line for NEAREST when magnifying, or 
+            // add a checkbox in the GUI to alternate in real time
+            this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
             this.quad.display();
         }
 
         // ---- END Primitive drawing section
 
-        if (this.displayMyTangram) {
-                this.tangram.display();
-            }
+        if (this.displayTangram) {
+            this.tangram.display();
+        }
+        if (this.displayCubeQuad) {
+            this.cubequad.display();
+        }
     }
 }

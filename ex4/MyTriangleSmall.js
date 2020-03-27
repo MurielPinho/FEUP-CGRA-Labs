@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 class MyTriangleSmall extends CGFobject {
-    constructor(scene,tCoords) {
+    constructor(scene, tCoords) {
         super(scene);
         this.initBuffers(tCoords);
     }
