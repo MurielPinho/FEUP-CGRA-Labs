@@ -25,11 +25,15 @@ class MyScene extends CGFscene {
         this.plane = new MyPlane(this, 5);
         this.cone = new MyCone(this, 3, 1);
         this.pyramid = new MyPyramid(this, 3, 1);
-        
-        this.objects = [this.plane, this.pyramid, this.cone];
+        this.tangram = new MyTangram(this);
+        this.unitCube = new MyUnitCube(this);
+
+
+        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.unitCube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2};
+        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Unit Cube': 4 };
+
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -38,6 +42,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.ambientLight = 0.3;
 
     }
     initLights() {
@@ -141,6 +146,7 @@ class MyScene extends CGFscene {
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
