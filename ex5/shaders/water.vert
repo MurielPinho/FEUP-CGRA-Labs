@@ -13,7 +13,7 @@ uniform float normScale;
 varying vec2 vTextureCoord;
 
 void main() {
-	vec4 map = texture2D(texture, aTextureCoord+vec2(timeFactor*0.02, timeFactor*0.01));
+	vec4 map = texture2D(texture, aTextureCoord+vec2(timeFactor*0.01, timeFactor*0.005));
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 	gl_Position.y +=map.r*5.0;
